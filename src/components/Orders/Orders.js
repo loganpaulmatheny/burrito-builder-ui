@@ -2,6 +2,8 @@ import React from "react";
 import "./Orders.css";
 
 const Orders = ({ orders }) => {
+  console.log("getting to orders");
+  console.log(orders);
   const orderEls = orders.orders.map((order) => {
     return (
       <div className="order">

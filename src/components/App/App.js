@@ -8,8 +8,13 @@ function App() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    getOrders().then().catch((err) => console.error("Error fetching:", err));
-  });
+    getOrders()
+      .then((data) => {
+        console.log(data);
+        setOrders(data);
+      })
+      .catch((err) => console.error("Error fetching:", err));
+  }, []);
 
   return (
     <main className="App">
@@ -17,8 +22,7 @@ function App() {
         <h1>Burrito Builder</h1>
         <OrderForm />
       </header>
-
-      <Orders orders={orders} />
+      {orders.orders.length > 0 && <Orders orders={orders} />}
     </main>
   );
 }
