@@ -12,7 +12,7 @@ function OrderForm(props) {
   function clearInputs() {
     setName("");
     setIngredients([]);
-  };
+  }
 
   const possibleIngredients = [
     "beans",
@@ -47,7 +47,7 @@ function OrderForm(props) {
         placeholder="Name"
         name="name"
         value={name}
-        // onChange={(e) => }
+        onChange={(event) => setName(event.target.value)}
       />
 
       {ingredientButtons}
