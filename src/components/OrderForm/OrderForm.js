@@ -68,7 +68,9 @@ function OrderForm({ addOrder }) {
 
       {ingredientButtons}
 
-      <p>Order: {ingredients.join(", ") || "Nothing selected"}</p>
+      <p className="order-recap">
+        Order: {ingredients.join(", ") || "Nothing selected"}
+      </p>
 
       <button
         className="submit-button"

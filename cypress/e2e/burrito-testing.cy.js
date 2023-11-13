@@ -8,15 +8,16 @@ describe("Testing the initial load of the page", () => {
     cy.intercept("POST", "http://localhost:3001/api/v1/orders", {
       statusCode: 201,
       body: {
+        id: 4,
         name: "Logan's Burrito",
         ingredients: ["beans", "steak", "lettuce"],
-        id: 4,
       },
     }).as("postRequest");
   });
 
   it("Should have all the intial elements on the page", () => {
     cy.visit("http://localhost:3000")
+      .wait("@getRequest")
       .get("h1")
       .should("contain", "Burrito Builder")
       .get("input")
@@ -54,4 +55,46 @@ describe("Testing the initial load of the page", () => {
       .eq(4)
       .should("contain", "jalapeno");
   });
+
+  it("Should be able to submit an order", () => {
+    cy.visit("http://localhost:3000")
+      .wait("@getRequest")
+      .get("input")
+      .type("Logan's Burrito")
+      .get(".ingredients-button")
+      .eq(0)
+      .click()
+      .get(".ingredients-button")
+      .eq(1)
+      .click()
+      .get(".ingredients-button")
+      .eq(4)
+      .click()
+      .get(".order-recap")
+      .should("contain", "Order: beans, steak, lettuce")
+      .get(".submit-button")
+      .click()
+      .wait("@postRequest")
+      .get(".order")
+      .eq(3)
+      .find("h3")
+      .should("contain", "Logan's Burrito")
+      .get(".order")
+      .eq(3)
+      .find("li")
+      .eq(0)
+      .should("contain", "beans")
+      .get(".order")
+      .eq(3)
+      .find("li")
+      .eq(1)
+      .should("contain", "steak")
+      .get(".order")
+      .eq(3)
+      .find("li")
+      .eq(2)
+      .should("contain", "lettuce");
+  });
+
+  // it("")
 });
