@@ -10,30 +10,16 @@ function App() {
   useEffect(() => {
     getOrders()
       .then((data) => {
-        console.log(data);
         setOrders(data.orders);
       })
       .catch((err) => console.error("Error fetching:", err));
   }, []);
 
   function addOrder(newOrder) {
-    // clearError();
     postOrder(newOrder).then((data) => {
       console.log("Posted data", data);
       setOrders([...orders, data]);
     });
-    // .catch((error) => {
-    //   console.log(error.message);
-    //   if (error.message === "500") {
-    //     setError(
-    //       "Oopsy daisy, looks like something went wrong, please try again later!"
-    //     );
-    //   } else {
-    //     setError(
-    //       "Hmmmm, not sure what happened there, check your URL and try again"
-    //     );
-    //   }
-    // });
   }
 
   return (
