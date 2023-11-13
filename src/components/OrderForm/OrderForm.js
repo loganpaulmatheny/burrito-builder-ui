@@ -1,11 +1,17 @@
 import { useState } from "react";
 
-function OrderForm(props) {
+function OrderForm({ addOrder }) {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
   function handleSubmit(e) {
     e.preventDefault();
+    const newOrder = {
+      id: Date.now(),
+      name,
+      ingredients,
+    };
+    addOrder(newOrder);
     clearInputs();
   }
 
@@ -28,12 +34,21 @@ function OrderForm(props) {
     "cilantro",
     "sour cream",
   ];
+
+  const handleIngredientsClick = (ingredient) => {
+    setIngredients((ingredients) => [...ingredients, ingredient]);
+  };
+
   const ingredientButtons = possibleIngredients.map((ingredient) => {
     return (
       <button
         key={ingredient}
         name={ingredient}
-        // onClick={(e) => }
+        onClick={(e) => {
+          e.preventDefault();
+          console.log("an ingredient was clicked");
+          handleIngredientsClick(ingredient);
+        }}
       >
         {ingredient}
       </button>
