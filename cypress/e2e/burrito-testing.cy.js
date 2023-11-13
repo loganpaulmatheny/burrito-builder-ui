@@ -61,6 +61,7 @@ describe("Testing the initial load of the page", () => {
       .wait("@getRequest")
       .get("input")
       .type("Logan's Burrito")
+      .should("have.value", "Logan's Burrito")
       .get(".ingredients-button")
       .eq(0)
       .click()
@@ -96,5 +97,27 @@ describe("Testing the initial load of the page", () => {
       .should("contain", "lettuce");
   });
 
-  // it("")
+  it("Should not be able to add an order without BOTH a name and at least one ingredient", () => {
+    cy.visit("http://localhost:3000")
+      .wait("@getRequest")
+      .get(".submit-button")
+      .should("be.disabled")
+      .get("input")
+      .type("Should not submit this burrito")
+      .get(".submit-button")
+      .should("be.disabled")
+      .get("input")
+      .clear()
+      .get(".ingredients-button")
+      .eq(11)
+      .click()
+      .get(".order-recap")
+      .should("contain", "sour cream")
+      .get(".submit-button")
+      .should("be.disabled")
+      .get("input")
+      .type("Should be able to submit this burrito BUT DONT")
+      .get(".submit-button")
+      .should("be.enabled");
+  });
 });
