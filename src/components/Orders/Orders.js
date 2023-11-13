@@ -1,7 +1,7 @@
 import React from "react";
 import "./Orders.css";
 
-const Orders = ({ orders }) => {
+const Orders = ({ orders, deleteOrder }) => {
   const orderEls = orders.map((order) => {
     return (
       <div className="order" key={order.id}>
@@ -11,6 +11,7 @@ const Orders = ({ orders }) => {
             return <li key={ingredient}>{ingredient}</li>;
           })}
         </ul>
+        <div onClick={() => deleteOrder(order.id)}>🗑️</div>
       </div>
     );
   });
