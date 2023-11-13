@@ -4,13 +4,13 @@ import "./Orders.css";
 const Orders = ({ orders }) => {
   console.log("getting to orders");
   console.log(orders);
-  const orderEls = orders.orders.map((order) => {
+  const orderEls = orders.map((order) => {
     return (
-      <div className="order">
+      <div className="order" key={order.id}>
         <h3>{order.name}</h3>
         <ul className="ingredient-list">
           {order.ingredients.map((ingredient) => {
-            return <li>{ingredient}</li>;
+            return <li key={ingredient}>{ingredient}</li>;
           })}
         </ul>
       </div>

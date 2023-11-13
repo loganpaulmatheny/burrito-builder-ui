@@ -11,7 +11,7 @@ function App() {
     getOrders()
       .then((data) => {
         console.log(data);
-        setOrders(data);
+        setOrders(data.orders);
       })
       .catch((err) => console.error("Error fetching:", err));
   }, []);
@@ -22,7 +22,7 @@ function App() {
         <h1>Burrito Builder</h1>
         <OrderForm />
       </header>
-      {orders.orders.length > 0 && <Orders orders={orders} />}
+      {orders.length > 0 && <Orders orders={orders} />}
     </main>
   );
 }
