@@ -42,6 +42,7 @@ function OrderForm({ addOrder }) {
   const ingredientButtons = possibleIngredients.map((ingredient) => {
     return (
       <button
+        className="ingredients-button"
         key={ingredient}
         name={ingredient}
         onClick={(e) => {
@@ -69,7 +70,13 @@ function OrderForm({ addOrder }) {
 
       <p>Order: {ingredients.join(", ") || "Nothing selected"}</p>
 
-      <button onClick={(e) => handleSubmit(e)}>Submit Order</button>
+      <button
+        className="submit-button"
+        onClick={(e) => handleSubmit(e)}
+        disabled={ingredients.length === 0 || name === ""}
+      >
+        Submit Order
+      </button>
     </form>
   );
 }
