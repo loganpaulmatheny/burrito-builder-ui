@@ -47,7 +47,6 @@ function OrderForm({ addOrder }) {
         name={ingredient}
         onClick={(e) => {
           e.preventDefault();
-          console.log("an ingredient was clicked");
           handleIngredientsClick(ingredient);
         }}
       >
